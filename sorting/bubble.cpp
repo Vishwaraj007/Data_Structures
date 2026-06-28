@@ -20,7 +20,9 @@ void bubble(vector<int> &arr)
 int main()
 {
     int n;
+    cout<<"enter the number of entries : ";
     cin>>n;
+    cout<<"\n enter all the entries : ";
     vector<int> arr;
     for(int i=0;i<n;i++)
     {
@@ -29,6 +31,7 @@ int main()
         arr.push_back(temp);
     }
     bubble(arr);
+    cout<<"\n sorted array : ";
     for(int  i : arr)
     {
         cout<<i<<" ";
