@@ -1,50 +1,77 @@
-#include<bits/stdc++.h>
+#include<iostream>
 #include<vector>
 using namespace std;
 
-int partition(vector<int> &arr, int min, int max)
+void quick_asc(vector<int> &arr,int low,int high)                   //......................ASSCEDING
 {
-    int pivot = min;
-    int i = min;
-    int j = max;
-    while(i<=j)
+    if(low >= high) return;
+    int pivot = low;
+    int i = low;
+    int j = high;
+    while(i < j)
     {
-        while(arr[i]<=arr[pivot] && i < max)
+        while(arr[i] <= arr[pivot] && i < high)
         {
             i++;
         }
-        while(arr[j]>arr[pivot] && j > min)
+        while(arr[j] > arr[pivot] && j > low)
         {
             j--;
         }
         if(i < j)
+        {
             swap(arr[i],arr[j]);
+        }
+        
     }
-    swap(arr[pivot],arr[j]);
-return j;
+    swap(arr[pivot] , arr[j]);
+    quick_asc(arr,low,j-1);
+    quick_asc(arr,j+1,high);
 }
 
-void quick(vector<int> &arr,int min, int max)
+void quick_desc(vector<int> &arr,int low,int high)                   //...................... DESCENDING
 {
-    int par = partition(arr,min,max);
-    if(min < max)
+    if(low >= high) return;
+    int pivot = low;
+    int i = low;
+    int j = high;
+    while(i < j)
     {
-        quick(arr, min,par-1);
-        quick(arr, par+1,max);
+        while(arr[i] > arr[pivot] && i < high)
+        {
+            i++;
+        }
+        while(arr[j] <= arr[pivot] && j > low)
+        {
+            j--;
+        }
+        if(i < j)
+        {
+            swap(arr[i],arr[j]);
+        }
+        
     }
+    swap(arr[pivot] , arr[j]);
+    quick_desc(arr,low,j-1);
+    quick_desc(arr,j+1,high);
 }
-
-
-
 
 int main()
 {
-    vector<int> arr = {89,1,44,67,2};
-    cout<<"Hello";
-    quick(arr,0,arr.size()-1);
+    cout<<"in...";
+    vector<int> arr = {5,4,3,66,7,22,1,3,5,7,888};
+    quick_asc(arr,0,arr.size()-1);
+    cout<<"\nAssceding order : ";
     for(int i : arr)
     {
-        cout<<i;
+        cout<<i<<" ";
+    }
+
+    quick_desc(arr,0,arr.size()-1);
+    cout<<"\nDescending Order : ";
+    for(int i : arr)
+    {
+        cout<<i<<" ";
     }
     return 0;
 }
